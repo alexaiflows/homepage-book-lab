@@ -40,10 +40,8 @@ def build_page(rows, now):
 </head>
 <body>
   <main class="container">
-    <section class="intro">
-      <p class="eyebrow"><a href="index.html">첫 화면으로</a></p>
-      <h1>프로젝트 목록</h1>
-    </section>
+    <p class="intro"><a href="index.html">첫 화면으로</a></p>
+    <h1>프로젝트 목록</h1>
     <section class="section">
       <h2>오늘의 추천</h2>
       {card(pick)}
