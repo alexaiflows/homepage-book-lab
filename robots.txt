@@ -1,0 +1,4 @@
+# C02 | robots.txt — 검색 로봇에게 주는 안내
+User-agent: *
+Allow: /
+Sitemap: https://아이디.github.io/sitemap.xml
