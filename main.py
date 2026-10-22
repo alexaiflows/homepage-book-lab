@@ -22,14 +22,14 @@ def card(row):
     if row["링크"]:
         title = f'<a href="{escape(row["링크"])}">{title}</a>'
     return f"""<article class="project-card">
-      <span class="status">{escape(row["상태"])}</span>
-      <h3>{title}</h3>
-      <p>{escape(row["설명"])} ({escape(row["분류"])})</p>
-    </article>"""
+        <span class="status">{escape(row["상태"])}</span>
+        <h3>{title}</h3>
+        <p>{escape(row["설명"])} ({escape(row["분류"])})</p>
+      </article>"""
 
 def build_page(rows, now):
     pick = rows[now.toordinal() % len(rows)]  # 날마다 바뀌는 추천
-    cards = "\n    ".join(card(row) for row in rows)
+    cards = "\n      ".join(card(row) for row in rows)
     return f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -40,14 +40,22 @@ def build_page(rows, now):
 </head>
 <body>
   <main class="container">
-    <p><a href="index.html">첫 화면으로</a></p>
-    <h1>프로젝트 목록</h1>
-    <h2>오늘의 추천</h2>
-    {card(pick)}
-    <h2>전체 {len(rows)}개</h2>
-    {cards}
-    <p>생성 시각: {now:%Y-%m-%d %H:%M} (한국 시각)</p>
+    <section class="intro">
+      <p class="eyebrow"><a href="index.html">첫 화면으로</a></p>
+      <h1>프로젝트 목록</h1>
+    </section>
+    <section class="section">
+      <h2>오늘의 추천</h2>
+      {card(pick)}
+    </section>
+    <section class="section">
+      <h2>전체 {len(rows)}개</h2>
+      {cards}
+    </section>
   </main>
+  <footer class="site-footer container">
+    <p>생성 시각: {now:%Y-%m-%d %H:%M} (한국 시각)</p>
+  </footer>
 </body>
 </html>
 """
