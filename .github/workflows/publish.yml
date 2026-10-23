@@ -1,4 +1,4 @@
-# C02 | .github/workflows/publish.yml — 사이트를 만들어 Pages에 게시한다
+# .github/workflows/publish.yml — 사이트를 만들어 Pages에 게시한다(8장: 공개 주소를 넘겨 저장해 둔 판을 읽게 함)
 name: publish
 
 on:
@@ -26,8 +26,13 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
+      - id: pages
+        uses: actions/configure-pages@v6
       - run: python main.py
-      - uses: actions/configure-pages@v6
+        env:
+          SHEET_CSV_URL: ${{ vars.SHEET_CSV_URL }}
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
